@@ -1,6 +1,10 @@
 FROM python:3-alpine
 
-RUN apk update && apk upgrade && apk --no-cache add bash git less openssh && pip install detect-secrets
+
+RUN apk update && apk upgrade \
+    && apk --no-cache add bash git less openssh \
+    && pip install --no-build-isolation pyyaml==6.0 \
+    && pip install detect-secrets
 
 COPY entrypoint.sh /entrypoint.sh
 
